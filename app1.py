@@ -13,10 +13,10 @@ from sklearn.naive_bayes import MultinomialNB
 import joblib
 
 app = Flask(__name__)
- NB_spam_model = open('NB_spam_model.pkl','rb')
- clf = joblib.load(NB_spam_model)
- cv_model = open('cv.pkl', 'rb')
- cv = joblib.load(cv_model)
+NB_spam_model = open('NB_spam_model.pkl','rb')
+clf = joblib.load(NB_spam_model)
+cv_model = open('cv.pkl', 'rb')
+cv = joblib.load(cv_model)
 
 @app.route('/')
 def home():
