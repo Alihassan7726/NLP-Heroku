@@ -20,18 +20,21 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 def predict_fun():
-	NB_spam_model = open('NB_spam_model.pkl','rb')
-        clf = joblib.load(NB_spam_model)
+	
+    NB_spam_model = open('NB_spam_model.pkl','rb')
+    clf = joblib.load(NB_spam_model)
     
-        cv_model = open('cv.pkl', 'rb')
-        cv = joblib.load(cv_model)
+    cv_model = open('cv.pkl', 'rb')
+    cv = joblib.load(cv_model)
     
+    if request.method == 'POST':
         message = request.form['message']
         data = [message]
         vect = cv.transform(data).toarray()
         my_prediction = clf.predict(vect)
-        return render_template('result.html',prediction = my_prediction)
+	
+    return render_template('result.html',prediction = my_prediction)
 
 
 if __name__ == '__main__':
-	app.run(debug =True)
+	app.run()
